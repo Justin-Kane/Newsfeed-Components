@@ -13,11 +13,7 @@ let menuItems = [
 
   Step 1: Write a function that will create a menu component as seen below:
 
-  <div class="menu">
-    <ul>
-      {each menu item as a list item}
-    </ul>
-  </div>
+  
 
   The function takes an array as its only argument.
 
@@ -33,3 +29,37 @@ let menuItems = [
   Step 6: add the menu component to the DOM.
   
 */
+{/* <div class="menu">
+  <ul>
+    {each menu item as a list item}
+  </ul>
+</div> */}
+
+let dropDown = document.querySelector('.menu-button');
+let header = document.querySelector('.header');
+let body = document.querySelector('body');
+
+function menuCreator(arr) {
+
+  let div = document.createElement('div');
+  let ul = document.createElement('ul');
+
+  header.appendChild(div);
+  div.appendChild(ul);
+  div.classList.add('menu');
+
+  arr.forEach((item) => {
+    let li = document.createElement('li');
+    li.textContent = item;
+    ul.appendChild(li);
+  })
+  
+  dropDown.addEventListener('click', (e) => {
+    let menu = document.querySelector('.menu');
+    menu.classList.toggle('menu--open');
+  })
+
+  return div;
+}
+
+menuCreator(menuItems);
