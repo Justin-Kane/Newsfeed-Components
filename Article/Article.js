@@ -84,20 +84,20 @@ const data = [
 
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
-          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`,
+  },
+  {
+    title: `Example Title`,
+    date: `September 5th, 2019`,
+    firstParagraph: `This is the first paragraph`,
+    secondParagraph: `This is the middle paragraph`,
+    thirdParagraph: `This is the last paragraph`,
   }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
-
-    {three separate paragraph elements}
-
-    <span class='expandButton'></span>
-  </div>
+  
 
   Hint: You will need to use createElement more than once here!
 
@@ -112,3 +112,57 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+{/* <div class="article">
+  <h2>{title of the article}</h2>
+  <p class="date">{date of the article}</p>
+
+  {three separate paragraph elements}
+
+  <span class='expandButton'></span>
+</div> */}
+
+const articlers = document.querySelector('.articles')
+
+data.forEach(item => {
+  articlers.appendChild(createArticle(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph));
+})
+
+function createArticle(title, date, para1, para2, para3){
+  //elements
+  const articleDiv = document.createElement('div');
+  const titleH2 = document.createElement('h2');
+  const dateP = document.createElement('p');
+  const para1P = document.createElement('p');
+  const para2P = document.createElement('p');
+  const para3P = document.createElement('p');
+  const expandButtonSpan = document.createElement('span');
+
+  //structure
+  articleDiv.appendChild(titleH2);
+  articleDiv.appendChild(dateP);
+  articleDiv.appendChild(para1P);
+  articleDiv.appendChild(para2P);
+  articleDiv.appendChild(para3P);
+  articleDiv.appendChild(expandButtonSpan);
+
+  //class
+  articleDiv.classList.add('article');
+  dateP.classList.add('date');
+  expandButtonSpan.classList.add('expandButton');
+
+  //content
+  titleH2.textContent = title;
+  dateP.textContent = date;
+  para1P.textContent = para1;
+  para2P.textContent = para2;
+  para3P.textContent = para3;
+  expandButtonSpan.textContent = 'expand';
+
+  //event listener
+  expandButtonSpan.addEventListener('click', (e) => {
+    articleDiv.classList.toggle('article-open');
+  })
+
+  return articleDiv
+}
